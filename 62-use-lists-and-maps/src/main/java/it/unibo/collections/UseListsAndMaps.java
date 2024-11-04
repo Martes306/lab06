@@ -22,39 +22,69 @@ public final class UseListsAndMaps {
      */
     public static void main(final String... s) {
 
+        int i;
         ArrayList<Integer> arr = new ArrayList<>();
-        for (int i = 1000; i <= 2000; i++) {
+        for (i = 1000; i <= 2000; i++) {
             arr.add(i);
         }
-        System.out.println(arr);
+        // System.out.println(arr);
 
         LinkedList<Integer> list = new LinkedList<>(arr);
-        System.out.println(list);
+        // System.out.println(list);
 
-        int tmp; 
-        tmp = arr.get(0); 
-        arr.set(0, arr.get(arr.size()));
-        arr.set(arr.size(), tmp);
+        int tmp;
+        tmp = arr.get(0);
+        arr.set(0, arr.get(arr.size() - 1));
+        arr.set(arr.size() - 1, tmp);
 
-        for(final int arrMember : arr){
-            System.out.println(arrMember);
+        for (final int arrMember : arr) {
+            System.out.print(arrMember + " ");
         }
+        System.out.println();
 
         arr.clear();
         long timeArr = System.nanoTime();
-        for (int i = 1; i <= ELEM; i++) {
+        for (i = 1; i <= ELEM; i++) {
             arr.add(i);
         }
         timeArr = System.nanoTime() - timeArr;
-        
+
         list.clear();
         long timeList = System.nanoTime();
-        for (int i = 1; i <= ELEM; i++) {
+        for (i = 1; i <= ELEM; i++) {
             list.add(i);
         }
         timeList = System.nanoTime() - timeList;
 
         System.out.println("Tempo array : " + timeArr + "\n" + "Tempo lista : " + timeList);
+
+        long tot = 0;
+        for (int times = 0; times < 5; times++) {
+            timeArr = System.nanoTime();
+            for (i = 0; i < ELEM / 2; i++) {
+            }
+            int testArr = arr.get(i);
+            System.out.println(testArr);
+            timeArr = System.nanoTime() - timeArr;
+            tot = tot + timeArr;
+        }
+        System.out.println("Tempo array : " + tot / 5);
+
+        tot = 0;
+        i = 0;
+        for (int times = 0; times < 5; times++) {
+            var iter = list.iterator();
+            timeList = System.nanoTime();
+            while (iter.hasNext() && i < ELEM / 2) {
+                iter.next();
+                i++;
+            }
+            int testList = arr.get(i);
+            System.out.println(testList);
+            timeArr = System.nanoTime() - timeArr;
+            tot = tot + timeArr;
+        }
+        System.out.println("Tempo lista : " + tot / 5);
 
         /*
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
