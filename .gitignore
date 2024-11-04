@@ -1,4 +1,5 @@
 *.class
 /bin
+build/
 .gradle
 61-git-remotes-merge-conflict/OOP-git-merge-conflict-test/
