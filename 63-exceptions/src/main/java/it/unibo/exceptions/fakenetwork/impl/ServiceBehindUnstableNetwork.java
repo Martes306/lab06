@@ -26,9 +26,10 @@ public final class ServiceBehindUnstableNetwork implements NetworkComponent {
      * @param randomSeed random generator seed for reproducibility
      */
     public ServiceBehindUnstableNetwork(final double failProbability, final int randomSeed) {
-        /*
-         * The probability should be in [0, 1[!
-         */
+        if(failProbability < 0 && failProbability >= 1){
+            final String msg = "Fail Probability must be >= 0 e and < 1";
+            throw new IllegalArgumentException(msg);
+        }
         this.failProbability = failProbability;
         randomGenerator = new Random(randomSeed);
     }
