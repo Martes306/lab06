@@ -1,6 +1,7 @@
 package it.unibo.collections;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,8 @@ import java.util.Map;
  */
 public final class UseListsAndMaps {
 
+    private final static int INDEX_START = 0;
+    private final static int INDEX_FINAL = 1;
     private final static int ELEM = 100000;
 
     private UseListsAndMaps() {
@@ -22,6 +25,7 @@ public final class UseListsAndMaps {
      */
     public static void main(final String... s) {
 
+        // consegna 1
         int i;
         ArrayList<Integer> arr = new ArrayList<>();
         for (i = 1000; i <= 2000; i++) {
@@ -29,62 +33,69 @@ public final class UseListsAndMaps {
         }
         // System.out.println(arr);
 
+        // consegna 2
         LinkedList<Integer> list = new LinkedList<>(arr);
         // System.out.println(list);
 
+        // consegna 3
         int tmp;
-        tmp = arr.get(0);
-        arr.set(0, arr.get(arr.size() - 1));
-        arr.set(arr.size() - 1, tmp);
+        tmp = arr.get(INDEX_START);
+        arr.set(0, arr.get(arr.size() - INDEX_FINAL));
+        arr.set(arr.size() - INDEX_FINAL, tmp);
 
+        // consegna 4
         for (final int arrMember : arr) {
             System.out.print(arrMember + " ");
         }
         System.out.println();
 
+        // consegna 5
         arr.clear();
         long timeArr = System.nanoTime();
         for (i = 1; i <= ELEM; i++) {
-            arr.add(i);
+            arr.addFirst(i);
         }
         timeArr = System.nanoTime() - timeArr;
 
         list.clear();
         long timeList = System.nanoTime();
         for (i = 1; i <= ELEM; i++) {
-            list.add(i);
+            list.addFirst(i);
         }
         timeList = System.nanoTime() - timeList;
 
         System.out.println("Tempo array : " + timeArr + "\n" + "Tempo lista : " + timeList);
 
-        long tot = 0;
+        // consegna 6
+        timeArr = System.nanoTime();
         for (int times = 0; times < 5; times++) {
-            timeArr = System.nanoTime();
-            for (i = 0; i < ELEM / 2; i++) {
-            }
-            int testArr = arr.get(i);
-            System.out.println(testArr);
-            timeArr = System.nanoTime() - timeArr;
-            tot = tot + timeArr;
+            arr.get(ELEM / 2);
         }
-        System.out.println("Tempo array : " + tot / 5);
+        timeArr = System.nanoTime() - timeArr;
+        System.out.println("Tempo array : " + timeArr);
 
-        tot = 0;
-        i = 0;
+        timeList = System.nanoTime();
         for (int times = 0; times < 5; times++) {
-            var iter = list.iterator();
-            timeList = System.nanoTime();
-            while (iter.hasNext() && i < ELEM / 2) {
-                iter.next();
-                i++;
-            }
-            int testList = arr.get(i);
-            System.out.println(testList);
-            timeArr = System.nanoTime() - timeArr;
-            tot = tot + timeArr;
+            list.get(ELEM / 2);
         }
-        System.out.println("Tempo lista : " + tot / 5);
+        timeList = System.nanoTime();
+        System.out.println("Tempo lista : " + timeList);
+
+        // consegna 7
+        Map<String, Long> map = new HashMap<>();
+        map.put("Africa", 1110635000L);
+        map.put("Americas", 972005000L);
+        map.put("Antarctica", 0L);
+        map.put("Asia", 4298723000L);
+        map.put("Europe", 742452000L);
+        map.put("Oceania", 38304000L);
+
+        // consegna 8
+        long population = 0;
+        for (final Map.Entry<String, Long> entry : map.entrySet()) {
+            population = population + entry.getValue();
+        }
+        System.out.println("The mondial population is : " + population);
 
         /*
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
