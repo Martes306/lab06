@@ -25,16 +25,17 @@ public class GraphImpl<N> implements Graph<N>{
             grapEdges.add(target);
             this.graph.put(source, grapEdges);
         }
+        grapEdges.add(target);
     }
 
     @Override
     public Set<N> nodeSet() {
-        return null;
+        return graph.keySet();
     }
 
     @Override
     public Set<N> linkedNodes(N node) {
-        return null;   
+        return graph.get(node);   
     }
 
     @Override
